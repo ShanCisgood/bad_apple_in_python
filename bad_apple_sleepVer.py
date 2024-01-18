@@ -22,7 +22,7 @@ class VideoThread(threading.Thread):
 
         #cnt = 0
         while True:
-            #os.system("cls")
+            os.system("cls")
             ret, frame = cap.read()
             if not ret:
                 print(f'Error: Cannot recieve frame from: {path}')
@@ -32,7 +32,8 @@ class VideoThread(threading.Thread):
             sys.stdout.write('\r' + img)
             
             sys.stdout.flush()
-            cv2.waitKey(22)
+            time.sleep(0.008)
+            cv2.waitKey(1)
 
         cap.release()
         cv2.destroyAllWindows()
