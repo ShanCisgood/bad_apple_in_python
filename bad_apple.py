@@ -36,9 +36,9 @@ class VideoThread(threading.Thread):
             sys.stdout.flush()
             #cnt += 1
             #delay = 0.001 / 6571 * cnt + 0.03
-            #time.sleep(delay)
-
-            if cv2.waitKey(20) == ord('q'):
+            #time.sleep(0.008)
+            #cv2.waitKey(1)
+            if cv2.waitKey(22) == ord('q'):
                 break
 
         cap.release()
