@@ -5,9 +5,11 @@ import playsound
 import threading
 from PIL import Image
 import os
+import fpstimer
 
 path = 'datafile/bad_apple.mp4'
 frame_size = 100
+frame_interval = 1.0 / 30.75
 
 class AudioThread(threading.Thread):
     def run(self):
@@ -15,28 +17,42 @@ class AudioThread(threading.Thread):
 
 class VideoThread(threading.Thread):
     def run(self):
+        anime_str = []
         cap = cv2.VideoCapture(path)
         if not cap.isOpened():
             print(f'Error: Cannot open the video from: {path}')
             exit()
 
-        #cnt = 0
+        cnt = 0
         while True:
-            os.system("cls")
+            
             ret, frame = cap.read()
             if not ret:
                 print(f'Error: Cannot recieve frame from: {path}')
                 break
             frame = cv2.resize(frame, (125, 45))
             img = binary_generator(frame)
-            sys.stdout.write('\r' + img)
+            anime_str.append(img)
+            os.system("cls")
+            print(f'Proccessing: {round(cnt / 6571 * 100, 1)}%')
+            cnt += 1
             
-            sys.stdout.flush()
-            time.sleep(0.008)
-            cv2.waitKey(1)
-
         cap.release()
-        cv2.destroyAllWindows()
+
+        timer = fpstimer.FPSTimer(30)
+        audio_thread.start()
+        for frame in anime_str:
+            start_time = time.time()
+            os.system("cls")
+            sys.stdout.write('\r' + frame)
+            compute_delay = float(time.time() - start_time)
+            delay_duration = frame_interval - compute_delay
+            if delay_duration < 0:
+                delay_duration = 0
+            timer.sleep()
+        # f = open('output.txt', 'w')
+        # print(anime_str, file = f)
+        # f.close
 
 
 def pixels_to_binary(image_frame):
@@ -59,5 +75,5 @@ def binary_generator(image_frame):
 
 audio_thread = AudioThread(name = "Audio Thread")
 video_thread = VideoThread(name = "Video Thread")
-audio_thread.start()
+
 video_thread.start()
