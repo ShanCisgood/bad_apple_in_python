@@ -34,7 +34,7 @@ class VideoThread(threading.Thread):
             img = binary_generator(frame)
             anime_str.append(img)
             os.system("cls")
-            print(f'Proccessing: {round(cnt / 6571 * 100, 1)}%')
+            print(f'Processing: {round(cnt / 6571 * 100, 1)}%')
             cnt += 1
             
         cap.release()
