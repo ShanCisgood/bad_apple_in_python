@@ -41,10 +41,12 @@ class VideoThread(threading.Thread):
 
         timer = fpstimer.FPSTimer(30)
         audio_thread.start()
+        os.system("cls")
+        print('Playing bad_apple_sleepVer.py')
         for frame in anime_str:
             start_time = time.time()
-            os.system("cls")
-            sys.stdout.write('\r' + frame)
+            print('\033[H')
+            sys.stdout.write(frame)
             compute_delay = float(time.time() - start_time)
             delay_duration = frame_interval - compute_delay
             if delay_duration < 0:

@@ -20,6 +20,8 @@ class VideoThread(threading.Thread):
             print(f'Error: Cannot open the video from: {path}')
             exit()
 
+        os.system("cls")
+        print('Playing bad_apple.py: ')
         #cnt = 0
         while True:
             #os.system("cls")
@@ -29,7 +31,8 @@ class VideoThread(threading.Thread):
                 break
             frame = cv2.resize(frame, (125, 45))
             img = binary_generator(frame)
-            sys.stdout.write('\r' + img)
+            print('\033[H')
+            sys.stdout.write(img)
             
             sys.stdout.flush()
             cv2.waitKey(22)
