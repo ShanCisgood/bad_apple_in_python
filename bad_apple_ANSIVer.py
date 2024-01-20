@@ -29,7 +29,7 @@ class VideoThread(threading.Thread):
             if not ret:
                 print(f'Error: Cannot recieve frame from: {path}')
                 break
-            frame = cv2.resize(frame, (125, 45))
+            frame = cv2.resize(frame, (90, 30))
             img = ANSI_generator(frame)
             anime_str.append(img)
             os.system("cls")
@@ -45,7 +45,7 @@ class VideoThread(threading.Thread):
             start_time = time.time()
             # os.system("cls")
             print('\033[H')
-            sys.stdout.write(frame)
+            sys.stdout.write(''.join(frame))
             compute_delay = float(time.time() - start_time)
             delay_duration = frame_interval - compute_delay
             if delay_duration < 0:
@@ -55,17 +55,18 @@ class VideoThread(threading.Thread):
 
 def pixels_to_ANSI(image_frame):
     height, width, chennels = image_frame.shape
-    str = '               '
+    str = []
     for y in range(0, height):
         pre_r, pre_g, pre_b = image_frame[y][0]
-        str += f'\033[48;2;{pre_r};{pre_g};{pre_b}m'
+        str.append(f'\033[48;2;{pre_r};{pre_g};{pre_b}m')
         for x in range(0, width):
             r, g, b = image_frame[y][x]
             if r != pre_r or g != pre_g or b != pre_b:
-                str += f'\033[48;2;{r};{g};{b}m'
-            str += ' '
+                str.append(f'\033[48;2;{r};{g};{b}m')
+            str.append(' ')
             pre_r, pre_g, pre_b = r, g, b
-        str += '\033[0m\n               '
+        str.append('\033[0m\n')
+    # str = ''.join(str)
     return str
 
 def ANSI_generator(image_frame):

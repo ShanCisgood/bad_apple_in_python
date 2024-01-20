@@ -8,6 +8,7 @@ import os
 
 path = 'datafile/bad_apple.mp4'
 frame_size = 100
+frame_interval = 1.0 / 30.75
 
 class AudioThread(threading.Thread):
     def run(self):
@@ -24,18 +25,21 @@ class VideoThread(threading.Thread):
         print('Playing bad_apple.py: ')
         #cnt = 0
         while True:
-            #os.system("cls")
+            start_time = time.time()
             ret, frame = cap.read()
             if not ret:
                 print(f'Error: Cannot recieve frame from: {path}')
                 break
-            frame = cv2.resize(frame, (125, 45))
+            frame = cv2.resize(frame, (125, 40))
             img = binary_generator(frame)
             print('\033[H')
             sys.stdout.write(img)
             
-            sys.stdout.flush()
-            cv2.waitKey(22)
+            compute_delay = float(time.time() - start_time)
+            delay_duration = frame_interval - compute_delay
+            if delay_duration < 0:
+                delay_duration = 0
+            time.sleep(delay_duration)
 
         cap.release()
         cv2.destroyAllWindows()
