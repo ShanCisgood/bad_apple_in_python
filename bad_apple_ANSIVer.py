@@ -54,9 +54,7 @@ def ANSI_generator(image_frame):
         str.append(f'\033[48;2;{pre_r};{pre_g};{pre_b}m')
         for x in range(0, width):
             r, g, b = image_frame[y][x]
-            if r != pre_r or g != pre_g or b != pre_b:
-                str.append(f'\033[48;2;{r};{g};{b}m')
-            str.append(' ')
+            str.append(f'\033[48;2;{r};{g};{b}m ' if r != pre_r or g != pre_g or b != pre_b else ' ')
             pre_r, pre_g, pre_b = r, g, b
         str.append('\033[0m\n')
     return str
