@@ -3,11 +3,9 @@ import sys
 import time
 import playsound
 import threading
-from PIL import Image
 import os
 
 path = 'datafile/bad_apple.mp4'
-frame_size = 100
 frame_interval = 1.0 / 30.75
 
 class AudioThread(threading.Thread):
@@ -42,26 +40,17 @@ class VideoThread(threading.Thread):
             time.sleep(delay_duration)
 
         cap.release()
-        cv2.destroyAllWindows()
 
-
-def pixels_to_binary(image_frame):
+def binary_generator(image_frame):
+    image_frame = cv2.cvtColor(image_frame, cv2.COLOR_BGR2GRAY) # convert to grayscale
     height, width = image_frame.shape
     str = "               "
     
     for y in range(0, height):
         for x in range(0, width):
-            if image_frame[y, x] == 0:
-                str += '0'
-            else:
-                str += ' '
+            str += '0' if image_frame[y, x] == 0 else ' '
         str += '\n               '
     return str
-
-def binary_generator(image_frame):
-    image_frame = cv2.cvtColor(image_frame, cv2.COLOR_BGR2GRAY) # convert to grayscale
-    binary_str = pixels_to_binary(image_frame)
-    return binary_str
 
 audio_thread = AudioThread(name = "Audio Thread")
 video_thread = VideoThread(name = "Video Thread")

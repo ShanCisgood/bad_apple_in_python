@@ -3,11 +3,8 @@ import sys
 import time
 import playsound
 import threading
-import os
-import fpstimer
 
 path = 'datafile/bad_apple.mp4'
-frame_size = 100
 frame_interval = 1.0 / 30.75
 
 class AudioThread(threading.Thread):
@@ -23,6 +20,7 @@ class VideoThread(threading.Thread):
             exit()
 
         cnt = 0
+        print('\033[2J')
         while True:
             
             ret, frame = cap.read()
@@ -32,18 +30,14 @@ class VideoThread(threading.Thread):
             frame = cv2.resize(frame, (90, 30))
             img = ANSI_generator(frame)
             anime_str.append(img)
-            os.system("cls")
-            print(f'Processing: {round(cnt / 6571 * 100, 1)}%')
+            print(f'\033[HProcessing: {round(cnt / 6571 * 100, 1)}%')
             cnt += 1
-            
         cap.release()
 
         audio_thread.start()
-        print('\033[2J')
-        print('Playing bad_apple_ANSIVer.py')
+        print('\033[2JPlaying bad_apple_ANSIVer.py')
         for frame in anime_str:
             start_time = time.time()
-            # os.system("cls")
             print('\033[H')
             sys.stdout.write(''.join(frame))
             compute_delay = float(time.time() - start_time)
@@ -52,8 +46,7 @@ class VideoThread(threading.Thread):
                 delay_duration = 0
             time.sleep(delay_duration)
 
-
-def pixels_to_ANSI(image_frame):
+def ANSI_generator(image_frame):
     height, width, chennels = image_frame.shape
     str = []
     for y in range(0, height):
@@ -66,14 +59,8 @@ def pixels_to_ANSI(image_frame):
             str.append(' ')
             pre_r, pre_g, pre_b = r, g, b
         str.append('\033[0m\n')
-    # str = ''.join(str)
     return str
-
-def ANSI_generator(image_frame):
-    ANSI_str = pixels_to_ANSI(image_frame)
-    return ANSI_str
 
 audio_thread = AudioThread(name = "Audio Thread")
 video_thread = VideoThread(name = "Video Thread")
-
 video_thread.start()
