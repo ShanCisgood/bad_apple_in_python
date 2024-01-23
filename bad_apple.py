@@ -3,10 +3,9 @@ import sys
 import time
 import playsound
 import threading
-import os
 
 path = 'datafile/bad_apple.mp4'
-frame_interval = 1.0 / 30.75
+frame_interval = 1.0 / 30.75 # second / frame
 
 class AudioThread(threading.Thread):
     def run(self):
@@ -14,30 +13,36 @@ class AudioThread(threading.Thread):
 
 class VideoThread(threading.Thread):
     def run(self):
+
         cap = cv2.VideoCapture(path)
-        if not cap.isOpened():
+        if not cap.isOpened(): # determine whether video is read
             print(f'Error: Cannot open the video from: {path}')
             exit()
 
-        os.system("cls")
-        print('Playing bad_apple.py: ')
-        #cnt = 0
+        print('\033[2JPlaying bad_apple.py: ')
+        
         while True:
+            # because print(), sys.stdout.write() and other functions may cause delay
+            # it's necessary to compute delay time
             start_time = time.time()
+
+            # if video cannot be captured, loop break
             ret, frame = cap.read()
             if not ret:
                 print(f'Error: Cannot recieve frame from: {path}')
                 break
-            frame = cv2.resize(frame, (125, 40))
-            img = binary_generator(frame)
-            print('\033[H')
+
+            frame = cv2.resize(frame, (125, 40)) # resize the frame
+            img = binary_generator(frame) # convert each to frame strings from a list
+
+            print('\033[H') # move the cursor to the upper-left corner of the screen
             sys.stdout.write(img)
             
             compute_delay = float(time.time() - start_time)
-            delay_duration = frame_interval - compute_delay
+            delay_duration = frame_interval - compute_delay # compute delay duration
             if delay_duration < 0:
                 delay_duration = 0
-            time.sleep(delay_duration)
+            time.sleep(delay_duration) # make it sleep in order to maintain fps
 
         cap.release()
 
