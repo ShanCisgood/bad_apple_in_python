@@ -6,10 +6,11 @@ import threading
 
 path = 'datafile/bad_apple.mp4'
 frame_interval = 1.0 / 30.75 # second / frame
+chars = [' ', '0', '1']
 
 class AudioThread(threading.Thread):
     def run(self):
-        playsound.playsound("datafile/bad-apple-audio.mp3")
+        playsound.playsound("datafile/bad_apple_audio.mp3")
 
 class VideoThread(threading.Thread):
     def run(self):
@@ -47,13 +48,13 @@ class VideoThread(threading.Thread):
         cap.release()
 
 def binary_generator(image_frame):
-    image_frame = cv2.cvtColor(image_frame, cv2.COLOR_BGR2GRAY) # convert to grayscale
+    image_frame = cv2.cvtColor(image_frame, cv2.COLOR_RGB2GRAY) # convert to grayscale
     height, width = image_frame.shape
     str = "               "
     
     for y in range(0, height):
         for x in range(0, width):
-            str += '0' if image_frame[y, x] == 0 else ' '
+            str += chars[image_frame[y, x] // 86]
         str += '\n               '
     return str
 
