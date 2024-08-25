@@ -1,8 +1,8 @@
 # Bad Apple in Python
 The summer of 2023 was quite boring. Occasionally, I stumbled upon an interesting project, Bad Apple! Actually, I had seen various versions of Bad Apple videos on my YouTube again and again, and they interested me for a while. So, for my summer project, I decided to play Bad Apple on my PC, but in the console!
 
-[Watch the viedo](https://www.youtube.com/watch?v=vjqDYxDg70M)
-[![Watch the viedo](https://github.com/ShanCisgood/bad_apple_in_python/blob/main/datafile/badapplepic.png)](https://www.youtube.com/watch?v=vjqDYxDg70M)
+[Watch the viedo](https://www.youtube.com/watch?v=GkBC2aJ_PUQ)
+[![Watch the viedo](https://github.com/ShanCisgood/bad_apple_in_python/blob/main/datafile/badapplepic.png)](https://www.youtube.com/watch?v=GkBC2aJ_PUQ)
 
 ## Prerequisites
 - opencv-python
