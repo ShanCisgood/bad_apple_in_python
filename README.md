@@ -1,7 +1,8 @@
 # Bad Apple in Python
 The summer of 2023 was quite boring. Occasionally, I stumbled upon an interesting project, Bad Apple! Actually, I had seen various versions of Bad Apple videos on my YouTube again and again, and they interested me for a while. So, for my summer project, I decided to play Bad Apple on my PC, but in the console!
 
-[bad apple exhibition](https://www.youtube.com/watch?v=vjqDYxDg70M)
+[LINK](https://www.youtube.com/watch?v=vjqDYxDg70M)
+![](https://www.youtube.com/watch?v=vjqDYxDg70M)
 
 ## Prerequisites
 - opencv-python
