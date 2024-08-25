@@ -40,7 +40,8 @@ img = binary_generator(frame) # convert each to frame strings from a list
 ## License
 [MIT LICENSE](https://github.com/ShanCisgood/bad_apple_in_python/blob/main/LICENSE)
 
----
+## About this repository
 
-> The arthur of this repo: [ShanC](https://github.com/ShanCisgood)
-> The original [Bad Apple](https://www.nicovideo.jp/watch/sm8628149)
+The arthur of this repo: [ShanC](https://github.com/ShanCisgood)
+The original videos: [Bad Apple](https://www.nicovideo.jp/watch/sm8628149), [Bad Apple!! feat.SEKAI / 25時、ナイトコードで。 × 初音ミク](https://www.youtube.com/watch?v=v-fc1zv31zE)
+
