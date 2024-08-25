@@ -15,7 +15,7 @@ The summer of 2023 was quite boring. Occasionally, I stumbled upon an interestin
 - `bad_apple_ANSIVer.py`: using ANSI escape codes to print black and white
 - `lazy_text.txt`: every frames in Bad Apple, use it if your PC is too lazy to process these videos
 
-## How to run these code?
+## How to run these codes?
 1. Download this repo in ZIP and unzip it in your PC.
 2. Open your console and resize your console frame.
 3. Run either `bad_apple.py` or `bad_apple_ascii_ver.py` or `bad_apple_ANSIVer.py`.
