@@ -6,7 +6,7 @@ import threading
 
 path = 'datafile/bad_apple_seikai.mp4'
 frame_interval = 1.0 / 24.143 # second / frame
-ascii_chars = ['@', '#', '$', '%', '&', '~', '!', '?']
+ascii_chars = ['@', '#', '*', '=', '$', '%', '&', '~', '!', '?', '_', ' ']
 
 class AudioThread(threading.Thread):
     def run(self):
@@ -54,7 +54,7 @@ def binary_generator(image_frame):
     
     for y in range(0, height):
         for x in range(0, width):
-            str += ascii_chars[image_frame[y, x] // 32]
+            str += ascii_chars[image_frame[y, x] // 22]
         str += '\n               '
     return str
 
